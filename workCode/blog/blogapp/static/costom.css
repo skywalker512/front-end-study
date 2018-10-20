@@ -1,0 +1,38 @@
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    background-image: url("http://semantic-ui-forest.com/static/images/common/snow.png") !important;
+    background-repeat: repeat !important; 
+}
+body .ui.menu {
+    background: none; 
+}
+body nav.ui.menu {
+    box-shadow: none;
+    margin-bottom: 0; 
+}
+body nav.ui.menu .brand.item {
+    padding-left: 0; 
+}
+body nav.ui.menu .brand.item:hover {
+    background: none; 
+}
+
+/* .ui.vertical.segment {
+    padding: 3rem 0; }
+    .ui.vertical.segment:nth-of-type(even) {
+      background-color: rgba(0, 0, 0, 0.03);
+      } */
+
+.ui.vertical.stripe.segment {
+    padding: 3rem 0;
+}
+
+.ui.vertical.stripe.segment.blog {
+    background-color: rgba(0, 0, 0, 0.03);
+}
+
+footer > .ui.vertical.stripe.segment {
+    background-color: rgba(0, 0, 0, 0.06); 
+}

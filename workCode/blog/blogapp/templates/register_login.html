@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Login</title>
+        <link href="https://cdn.bootcss.com/semantic-ui/2.3.1/semantic.min.css" rel="stylesheet">
+        <link href="{% static 'costom.css' %}" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Oswald|Raleway" rel="stylesheet">
+        <style type="text/css">
+        body {
+            background-color: #DADADA;
+        }
+        body > .grid {
+            height: 100%;
+        }
+        .image {
+            margin-top: -100px;
+        }
+        .column {
+            max-width: 450px;
+        }
+        </style>
+
+    </head>
+    <body>
+
+        <div class="ui middle aligned center aligned grid">
+            <div class="column">
+                <h2 class="ui blue header">
+                <div class="content">
+                    Log-in to your account
+                </div>
+                </h2>
+                <form class="ui large form" method="post">
+                    <div class="ui stacked segment">
+                        {% for field in form  %}
+                            <div class="field">
+                                {{ field.label }}
+                                {{ field }}
+                            </div>
+                        {% endfor %}
+                        {% csrf_token %}
+                        <button  class="ui fluid large blue submit button" type="submit">Login</button>
+                    </div>
+
+                    <div class="ui error message"></div>
+
+                </form>
+                
+                {% if 'register' in request.path %}
+                    <div class="ui message">
+                        已有用户? <a href="login">Login</a>
+                    </div>
+                {% else %}
+                    <div class="ui message">
+                        New to us? <a href="register">Sign Up</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </body>
+</html>

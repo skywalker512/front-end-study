@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Blog Index</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.bootcss.com/semantic-ui/2.3.1/semantic.min.css" rel="stylesheet">
+    <link href="{% static 'costom.css' %}" rel="stylesheet">
+</head>
+<body>
+    <div class="pusher">
+        <div class="ui menu">
+            <div class="ui container">
+                <div class="header item"><a href="/">ToweLight@Blog</a></div>
+                <a class="item">Link</a>
+                <a class="item">Link</a>
+                <div class="right menu">
+                    <div class="item">
+                        <div class="ui action left icon input">
+                        <i class="search icon"></i>
+                        <input type="text" placeholder="">
+                        <button class="ui button">搜索</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ui vertical stripe segment">
+            <div class="ui container">
+                <h1 class="ui header">
+                Blog
+                <div class="sub header quote">The best way to predict future, is to create it.</div>
+                </h1>
+            </div>
+        </div>
+        <div class="ui vertical stripe segment blog">
+            <div class="ui divided grid stackable container">
+                <div class="row">
+                    <!-- <article class="eleven wide column"></article>
+                    <aside class="five wide column"></aside> -->
+                    <article class="eleven wide column">
+					{% for article in article_list %}
+						<div class="ui vertical segment">
+                        	<h2 class="ui header">
+                            	<a href="{% url 'detail' article.id %}">{{ article.title }}</a>
+                            	<div class="sub header">{{ article.add_date|date:"Y-m-d" }}</div>
+							</h2>
+							<p>{{ article.content|truncatechars:160 }}</p>
+							<!-- <div class="ui mini tag label">{{ article.tag }}</div> -->
+                        </div>
+					{% endfor %}
+					<div class="ui center aligned vertical segment container">
+							<div class="ui pagination menu">
+								{% if article_list.has_previous %}
+								<a href="{% url 'page' article_list.previous_page_number %}" class="item">
+									<i class="icon blue left arrow"></i>
+								</a>
+								{% else %}
+								<a href="{% url 'tag_page' tag_id 1 %}" class="disabled item">
+									<i class="icon left arrow"></i>
+								</a>
+								{% endif %}
+								{% if article_list.has_next %}
+								<a href="{% url 'tag_page' tag_id article_list.next_page_number %}" class="item">
+									<i class="icon blue right arrow"></i>
+								</a>
+								{% else %}
+								<a href="{% url 'tag_page' tag_id article_list.paginator.num_pages %}" class="disabled item">
+									<i class="icon right arrow"></i>
+								</a>
+								{% endif %}
+							</div>
+						</div>
+                    </article>
+                    <aside class="five wide column">
+                    	<div class="ui small header">
+                          	Tags
+                        </div>
+                        <div class="ui small vertical fluid menu">
+							{% for tag in tag_list %}
+                            {% ifequal tag.id tag_id %}
+                                <a class="active item" href="{% url 'tag' tag.id %}">{{ tag.name }}<sup>{{ tag.num_posts }}</sup></a>
+                            {% else %}
+                                <a class="item" href="{% url 'tag' tag.id %}">{{ tag.name }}<sup>{{ tag.num_posts }}</sup></a>
+                            {% endifequal %}
+							{% endfor %}
+                        </div>
+                    </aside>
+                </div>
+            </div>
+		</div>
+		<footer>
+			<div class="ui vertical stripe segment">
+				<div class="ui container">
+					<div class="ui stackable relaxed divided grid">
+						<div class="four wide column">
+							<h3 class="ui blue header">
+								TowerLight
+							</h3>
+							<div class="ui list">
+								<div class="item">
+									Made with <i class="heart icon"></i> by Houzhenhong.
+								</div>
+								<div class="item">
+									© 2018
+								</div>
+							</div>
+						</div>
+						<div class="three wide column">
+							<h4 class="ui header">
+								Powered By
+							</h4>
+							<div class="ui link list">
+								<a class="item" href="https://semantic-ui.com" target="_blank">Semanti-UI</a>
+							</div>
+						</div>
+						<div class="three wide column">
+							<h4 class="ui header">
+								Resources
+							</h4>
+							<div class="ui link list">
+								<a class="item" href="http://semantic-ui-forest.com/themes" target="_blank">Themes</a><a class="item" href="http://semantic-ui-forest.com/templates" target="_blank">Templates</a>
+							</div>
+						</div>
+						<div class="three wide column">
+							<h4 class="ui header">
+								About
+							</h4>
+							<div class="ui link list">
+								<a class="item" href="https://github.com/semantic-ui-forest/semantic-ui-forest/graphs/contributors" target="_blank">Author</a>
+								<a class="item" href="https://github.com/semantic-ui-forest/semantic-ui-forest/blob/master/LICENSE" target="_blank">License</a>
+							</div>
+						</div>
+						<div class="three wide column">
+							<h4 class="ui header">
+								Contact
+							</h4>
+							<div class="ui link list">
+								<a class="item" href="mailto:semantic-ui-forest@pptype.com">Email</a><a class="item" href="https://github.com/semantic-ui-forest" target="_blank">Github</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</div>
+</body>
+</html>
