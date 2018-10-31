@@ -341,3 +341,4 @@ ASALocalRun/
 pyvenv.cfg
 .venv
 pip-selfcheck.json
+tcl
