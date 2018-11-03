@@ -344,3 +344,4 @@ pip-selfcheck.json
 tcl
 
 .vscode
+*.sqlite3
